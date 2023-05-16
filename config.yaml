@@ -1,0 +1,61 @@
+gpu: cuda:1
+batch_size: 64                            # batch size
+epochs: 50                                # total number of epochs
+warmup: 10                                # warm-up epochs
+
+eval_every_n_epochs: 1                    # validation frequency
+resume_from: None #runs/Mar11_09-22-59               # resume training 训练文件存储路径，用于断点续训
+log_every_n_steps: 200                  # print training log frequency
+
+optim:
+  init_lr: 0.0005                              # initial learning rate for Adam optimizer
+  weight_decay: 0.00001                   # weight decay for Adam for Adam optimizer
+
+model: 
+  num_layer: 5                            # number of graph conv layers
+  emb_dim: 300                            # embedding dimension in graph conv layers
+  feat_dim: 512                           # output feature dimention
+  dropout: 0                              # dropout ratio
+  pool: mean                              # readout pooling (i.e., mean/max/add)
+
+seq_model: 
+  embed_dim: 32
+  hid_dim: 300
+  out_dim: 256
+  num_layer: 2
+
+
+dataset:
+  num_workers: 12                      # dataloader number of workers,num_workers的经验设置值是自己电脑/服务器的CPU核心数,缓慢增加num_workers，直到训练速度不再提高，就停止增加num_workers的值
+  valid_size: 0.05                        # ratio of validation data
+  data_path: /home/yrl/muti-view-RL/data/pkl/pubchem-10m-clean-6500.pkl         # path of pre-training data
+  algo: MMFF                              # MMFF/ETKDG/UFF 生成3D构象的方法
+
+loss:
+  temperature: 0.1                        # temperature of (weighted) NT-Xent loss
+  use_cosine_similarity: True             # whether to use cosine similarity in (weighted) NT-Xent loss (i.e. True/False) False对应使用dot_simililarity
+  lambda_1: 0 # 0.5                           # $\lambda_1$ to control faulty negative mitigation 
+  lambda_2: 1 # 0.5                          # $\lambda_2$ to control fragment contrast
+
+fp16_precision: 0                         # 是否使用混合精度计算
+
+
+# lambda_2=0    muti-view-RL/runs/Apr14_10-20-57
+# lambda_2=0.1  muti-view-RL/runs/Apr14_20-08-05
+# lambda_2=0.2  muti-view-RL/runs/Apr14_10-22-32
+# lambda_2=0.3  muti-view-RL/runs/Apr14_18-11-01
+# lambda_2=0.4  muti-view-RL/runs/Apr14_14-08-32
+# lambda_2=0.5
+# lambda_2=0.6  muti-view-RL/runs/Apr14_14-11-20
+# lambda_2=0.7  muti-view-RL/runs/Apr14_20-09-51
+# lambda_2=0.8  muti-view-RL/runs/Apr14_16-03-41
+# lambda_2=0.9  muti-view-RL/runs/Apr16_10-18-03
+# lambda_2=1.0  muti-view-RL/runs/Apr14_16-04-58
+
+# lambda_1: 0  lambda_2: 1 # muti-view-RL/runs/Apr20_21-18-24
+
+# batch_size=16   muti-view-RL/runs/Apr16_11-52-53
+# batch_size=32   muti-view-RL/runs/Apr16_11-56-24
+# batch_size=64   muti-view-RL/runs/Apr16_15-16-51
+
+
