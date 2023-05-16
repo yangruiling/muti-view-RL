@@ -3,8 +3,8 @@
 # Introduction
 基于多粒度对比表征学习的分子属性预测框架
 
-## Getting Started
-### Installation
+# Getting Started
+## Installation
 
 Set up conda environment and clone the github repo
 
@@ -32,28 +32,29 @@ $ pip install fairseq
 
 d. (optional) Install [Apex](https://github.com/NVIDIA/apex)(Pytorch混合精度训练加速器)
 ```
-    1、在https://github.com/kezewang/apex下载apex包，解压至Anaconda3\envs\enes_name\Lisite-packages目录下
-    2、使用以下命令安装：
-    cd 至 apex 文件夹下，使用Python setup.py install命令安装（推荐使用）
+1、在https://github.com/kezewang/apex下载apex包，解压至Anaconda3\envs\enes_name\Lisite-packages目录下
+2、使用以下命令安装：
+    cd 至 apex 文件夹下
+    使用Python setup.py install命令安装（推荐使用）
     或 pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
     或 pip install -v --no-cache-dir . (without CUDA/C++ extensions)
 ```
-### Run
-a. Train model
+## Run
+### 1. Train model
 ```
 cd MUTI-VIEW-RL
 python process.py -n 1000 # data preprocessing
 python MVRL.py
 ```
 
-b. Test pre-train model
+### 2. Test pre-train model
 ```
 cd MUTI-VIEW-RL
 python process_test.py
 python finetune.py
 ```
 
-### Question
+## Question
 1. pex导入失败：[升级pytorch1.9后出现cannot import name ‘container_abcs‘ from ‘torch._six‘](https://blog.csdn.net/qq_19313495/article/details/120361059)
 2. OSError: [WinError 1455] 页面文件太小，无法完成操作。
 
@@ -61,7 +62,7 @@ python finetune.py
     a、num_works 设置为0；
     b、batch_size 调小；
 
-### Pre-trained model optimal weight
+## Pre-trained model optimal weight
 - 6500 : ./runs/Feb17_10-57-05
 - 9990 ：./runs/Feb17_19-04-17
 - 1000 ：./runs/Feb18_15-22-33
